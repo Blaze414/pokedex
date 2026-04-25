@@ -24,6 +24,11 @@ A Flutter Pokédex app for browsing and identifying Pokémon using PokéAPI and 
 | Fonts | Nunito (Google Fonts) |
 | Images | cached_network_image |
 
+## Screenshots
+
+<img width="360" height="800" alt="Screenshot_20260425-135429_pokedex" src="https://github.com/user-attachments/assets/b6eac4fe-9823-4171-bf3c-1b9d23796564" />
+****<img width="360" height="800" alt="Screenshot_20260425-135356_pokedex" src="https://github.com/user-attachments/assets/74dc07b4-65b3-4f75-9302-5f63f3c7e018" />
+
 ## Setup
 
 1. **Clone and install dependencies**
@@ -90,8 +95,7 @@ lib/
 | `pokeapi.co/api/v2/evolution-chain/{id}` | Evolution chain |
 | `pokemoncries.com/cries/{id}.mp3` | Pokémon cry |
 
-## Screenshots
 
-<img width="1440" height="3200" alt="Screenshot_20260425-135429_pokedex" src="https://github.com/user-attachments/assets/b5de0e44-a62a-4a79-95d8-70c586296844" />
-<img width="1440" height="3200" alt="Screenshot_20260425-135356_pokedex" src="https://github.com/user-attachments/assets/9c293ccf-1b7c-4bf4-87e9-bbfc1ea41319" />
+
+
 
