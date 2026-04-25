@@ -2,12 +2,12 @@ import 'dart:io';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 class GeminiService {
-  final String apiKey = 'AIzaSyCC4sK4bJQgnBhW7FArtDf9QvNBibTiUW0';  // Replace with your actual API key
+  final String apiKey = 'AIzaSyB0aVu27o3IJQbHc2qC-ynATNVWA6wX0iA';  // Replace with your actual API key
   late final GenerativeModel model;
 
   GeminiService() {
     // Update the model version here
-    model = GenerativeModel(model: 'gemini-1.5-flash-002', apiKey: apiKey);
+    model = GenerativeModel(model: 'gemini-flash-latest', apiKey: apiKey);
   }
 
   Future<String> identifyPokemon(String imagePath) async {

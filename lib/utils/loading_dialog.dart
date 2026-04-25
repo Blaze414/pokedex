@@ -11,8 +11,8 @@ void showLoadingDialog(BuildContext context, String message) {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CircularProgressIndicator(),
-              SizedBox(width: 16),
+              const CircularProgressIndicator(),
+              const SizedBox(width: 16),
               Text(message),
             ],
           ),

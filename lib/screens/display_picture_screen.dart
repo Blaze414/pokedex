@@ -5,7 +5,7 @@ import 'vision_api_service.dart';
 class DisplayPictureScreen extends StatefulWidget {
   final String imagePath;
 
-  DisplayPictureScreen({required this.imagePath});
+  const DisplayPictureScreen({super.key, required this.imagePath});
 
   @override
   _DisplayPictureScreenState createState() => _DisplayPictureScreenState();
@@ -19,7 +19,8 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
   @override
   void initState() {
     super.initState();
-    _visionApiService = VisionApiService('sk-proj-BVGIbSJZO9YYqkoouf0ET3BlbkFJfADaCUc3zo0xthvvqp0p');
+    _visionApiService = VisionApiService(
+        'sk-proj-BVGIbSJZO9YYqkoouf0ET3BlbkFJfADaCUc3zo0xthvvqp0p');
     _identifyPokemon();
   }
 
@@ -42,24 +43,24 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Result')),
+      appBar: AppBar(title: const Text('Result')),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Column(
-        children: [
-          Image.file(File(widget.imagePath)),
-          if (_prediction != null)
-            Text(
-              'Prediction: $_prediction',
-              style: TextStyle(fontSize: 20),
+              children: [
+                Image.file(File(widget.imagePath)),
+                if (_prediction != null)
+                  Text(
+                    'Prediction: $_prediction',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                if (_prediction == null)
+                  const Text(
+                    'No prediction available',
+                    style: TextStyle(fontSize: 20),
+                  ),
+              ],
             ),
-          if (_prediction == null)
-            Text(
-              'No prediction available',
-              style: TextStyle(fontSize: 20),
-            ),
-        ],
-      ),
     );
   }
 }

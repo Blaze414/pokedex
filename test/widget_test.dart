@@ -1,30 +1,57 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:pokedex/main.dart';
+import 'package:pokedex/models/pokemon.dart';
+import 'package:pokedex/providers/settings_provider.dart';
+import 'package:pokedex/services/cache_service.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  TestWidgetsFlutterBinding.ensureInitialized();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  test('saving the Pokemon list primes detail and sprite caches', () async {
+    SharedPreferences.setMockInitialValues({});
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    final cache = CacheService();
+    final bulbasaur = Pokemon(
+      id: 1,
+      name: 'bulbasaur',
+      height: 7,
+      weight: 69,
+      baseExperience: 64,
+      abilities: const ['overgrow'],
+      types: const ['grass', 'poison'],
+      sprites: const {
+        'front_default': 'https://example.com/front.png',
+        'back_default': 'https://example.com/back.png',
+        'front_shiny': 'https://example.com/front_shiny.png',
+        'back_shiny': 'https://example.com/back_shiny.png',
+      },
+      cryUrl: 'https://pokemoncries.com/cries/1.mp3',
+      encounterLocations: const ['kanto-route-1'],
+      artwork: 'https://example.com/artwork.png',
+      stats: const {'hp': 45},
+    );
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await cache.savePokemonList([bulbasaur]);
+
+    final cachedDetail = await cache.loadPokemonDetail(1);
+    final cachedById = await cache.loadPokemonFromListById(1);
+    final cachedByName = await cache.loadPokemonFromListByName('Bulbasaur');
+    final cachedSprite = await cache.loadSprite('Bulbasaur');
+
+    expect(cachedDetail?.name, 'bulbasaur');
+    expect(cachedById?.encounterLocations, ['kanto-route-1']);
+    expect(cachedByName?.id, 1);
+    expect(cachedSprite, 'https://example.com/front.png');
+    expect(await cache.cachedDetailCount(), 1);
+    expect(await cache.cachedSpriteCount(), 1);
+  });
+
+  test('cache preference defaults to enabled and can be disabled', () async {
+    SharedPreferences.setMockInitialValues({});
+    expect(await SettingsProvider.shouldUseCache(), isTrue);
+
+    SharedPreferences.setMockInitialValues({'use_cache': false});
+    expect(await SettingsProvider.shouldUseCache(), isFalse);
   });
 }
