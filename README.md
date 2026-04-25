@@ -89,3 +89,9 @@ lib/
 | `pokeapi.co/api/v2/pokemon-species/{id}` | Species data |
 | `pokeapi.co/api/v2/evolution-chain/{id}` | Evolution chain |
 | `pokemoncries.com/cries/{id}.mp3` | Pokémon cry |
+
+## Screenshots
+
+<img width="1440" height="3200" alt="Screenshot_20260425-135429_pokedex" src="https://github.com/user-attachments/assets/b5de0e44-a62a-4a79-95d8-70c586296844" />
+<img width="1440" height="3200" alt="Screenshot_20260425-135356_pokedex" src="https://github.com/user-attachments/assets/9c293ccf-1b7c-4bf4-87e9-bbfc1ea41319" />
+
