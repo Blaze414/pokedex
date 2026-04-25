@@ -27,7 +27,7 @@ A Flutter Pokédex app for browsing and identifying Pokémon using PokéAPI and 
 ## Screenshots
 
 <img width="360" height="800" alt="Screenshot_20260425-135429_pokedex" src="https://github.com/user-attachments/assets/b6eac4fe-9823-4171-bf3c-1b9d23796564" />
-****<img width="360" height="800" alt="Screenshot_20260425-135356_pokedex" src="https://github.com/user-attachments/assets/74dc07b4-65b3-4f75-9302-5f63f3c7e018" />
+<img width="360" height="800" alt="Screenshot_20260425-135356_pokedex" src="https://github.com/user-attachments/assets/74dc07b4-65b3-4f75-9302-5f63f3c7e018" />
 
 ## Setup
 
