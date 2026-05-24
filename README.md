@@ -99,3 +99,7 @@ lib/
 
 
 
+
+## Architecture Diagram
+
+- REST API mind map and flow charts: `docs/rest_api_mindmap.md`
