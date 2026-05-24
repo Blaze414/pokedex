@@ -1,6 +1,6 @@
-# REST API Implementation Mind Map (Pokédex App)
+# REST API Architecture Overview (Pokédex App)
 
-Use this as a speaking guide for internship interviews.
+This document provides a clear, recruiter-friendly overview of how REST APIs are implemented in this project.
 
 ## 1) Big Picture (Mind Map)
 
@@ -124,17 +124,15 @@ flowchart TD
   H --> I[UI renders evolution stages]
 ```
 
-## 3) Interview Talking Points (Short Script)
+## 3) Summary for Recruiters and Interviewers
 
-- The app uses a dedicated **service layer** (`ApiService`) so UI screens do not call HTTP directly.
-- Each call goes through a shared `_get()` wrapper with a **30-second timeout**.
-- Data loading is **cache-aware** and controlled by a user setting (`shouldUseCache`).
-- The cache strategy is **cache-first with TTL** (24 hours), then fallback to network.
-- Pokémon list loading is a **fan-out workflow**: list endpoint first, then detail endpoint per Pokémon, then encounters per Pokémon.
-- Detail flow supports **multiple cache sources**: exact detail cache, then list cache by id/name, then network.
-- Models separate parsing for **network JSON** vs **cached JSON** (`fromJson` and `fromCache`) to keep serialization robust.
-- Evolution chain requires a **2-step REST traversal**: species endpoint → evolution chain URL.
-- Failures are explicit for critical endpoints (throw exceptions), but non-critical encounter lookup is resilient and returns an empty list.
+- The app separates API logic into `ApiService`, which keeps UI code clean and maintainable.
+- A common request wrapper adds a 30-second timeout for stability.
+- Caching is configurable through settings and uses a 24-hour TTL policy.
+- The list flow is: list endpoint → per-Pokémon detail endpoint → encounter endpoint.
+- The detail flow checks cache first, then falls back to network when needed.
+- Evolution data is fetched with a two-step API lookup: species endpoint, then evolution-chain URL.
+- Error handling is strict for critical data and tolerant for optional encounter locations.
 
 ## 4) Endpoints Mapped to Features
 
@@ -145,7 +143,3 @@ flowchart TD
 | Tap evolution stage | `fetchPokemonDetailsByName` | `/pokemon/{name}` |
 | Evolution tab chain | `fetchEvolutionChain` | `/pokemon-species/{id}` then returned `evolution_chain.url` |
 | Sprite fallback/lookup | `fetchPokemonSprite` | `/pokemon/{name}` (if cache miss) |
-
----
-
-If you want, I can also generate a **one-page simplified version** (super minimal, non-technical) for non-engineer interviewers.
